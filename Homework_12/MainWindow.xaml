@@ -1,0 +1,57 @@
+﻿<Window x:Class="Homework_12.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Homework_12"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="560" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="237*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="119*"/>
+        </Grid.ColumnDefinitions>
+        <TreeView x:Name="treeView" SelectedItemChanged="treeView_SelectedDepartmentChanged" Background="LightGray" HorizontalAlignment="Left" Height="269" Margin="10,7,0,0" VerticalAlignment="Top" Width="534" Grid.ColumnSpan="2" >
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding DepartmentsDb}">
+                    <TextBlock Text="{Binding DepartmentName}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="IsExpanded" Value="True" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+        <Button x:Name="button" Content="Создать компанию" Grid.Column="2" HorizontalAlignment="Left" Margin="0,7,0,0" VerticalAlignment="Top" Width="228" Height="23" Click="btnCreatCompany" RenderTransformOrigin="0.48,-0.741"/>
+        <TextBox x:Name="textBox" Grid.Column="2" IsReadOnly="True" HorizontalAlignment="Left" Height="18" Margin="0,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" RenderTransformOrigin="1.001,0.06"/>
+        <Label x:Name="label" Background="LightGray" Content="Зарплата заместителя директора" Grid.Column="2" HorizontalAlignment="Left" Margin="0,58,0,0" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.491,-0.702"/>
+        <TextBox x:Name="textBox1" Grid.Column="2" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="0,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.495,-2.237"/>
+        <Label x:Name="label1" Background="LightGray" Content="Зарплата директора" Grid.Column="2" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.506,-0.868" Height="26"/>
+        <Button x:Name="button1" Content="Дессериализация data.xml" Grid.Column="2" HorizontalAlignment="Left" Margin="0,195,0,0" VerticalAlignment="Top" Width="228" Height="20" Click="btnDeserialization" RenderTransformOrigin="0.495,-1.503"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="238" Margin="10,281,0,0" VerticalAlignment="Top" Width="534" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}"/>
+                    <GridViewColumn Header="Salary" DisplayMemberBinding="{Binding Salary}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="textBox2" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="1,220,0,0" TextWrapping="Wrap" Text="{Binding ElementName=listView, Path=SelectedItem.Name}" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.487,-0.636"/>
+        <Button x:Name="button2" Click="btnRefDepartment" Content="Редактировать департамент" Grid.Column="2" HorizontalAlignment="Left" Margin="1,437,0,0" VerticalAlignment="Top" Width="226" Height="20" RenderTransformOrigin="0.495,1.309"/>
+        <TextBox x:Name="textBox3" Grid.Column="1" HorizontalAlignment="Left" Height="18" Margin="79,414,0,0" TextWrapping="Wrap" Text="{Binding ElementName=treeView, Path=SelectedItem.DepartmentName}" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.317,0.375" Grid.ColumnSpan="2"/>
+        <Button x:Name="button3" Click="btnDeleteEmployee" Content="Удалить сотрудника" Grid.Column="2" HorizontalAlignment="Left" Margin="0,314,0,0" VerticalAlignment="Top" Width="228" Height="20" RenderTransformOrigin="0.525,-0.285"/>
+        <Button x:Name="button4" Content="Удалить департамент" Grid.Column="1" HorizontalAlignment="Left" Margin="78,462,0,0" VerticalAlignment="Top" Width="229" Height="20" Click="btnDeleteDepartment" RenderTransformOrigin="0.498,0.089" Grid.ColumnSpan="2"/>
+        <Button x:Name="button5" Content="Добавить сотрудника" Grid.Column="2" HorizontalAlignment="Left" Margin="0,339,0,0" VerticalAlignment="Top" Width="228" Height="20" Click="btnAddEmployee" RenderTransformOrigin="0.498,1.189"/>
+        <Button x:Name="button6" Content="Добавить департамент" Grid.Column="1" HorizontalAlignment="Left" Margin="79,487,0,0" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.088,-0.47" Height="20" Click="btnAddDepartment" Grid.ColumnSpan="2"/>
+        <Button x:Name="button7" Content="Сериализация в data.xml" Grid.Column="2" HorizontalAlignment="Left" Margin="0,170,0,0" VerticalAlignment="Top" Width="228" Height="20" RenderTransformOrigin="0.462,0.269" Click="btnSerialization"/>
+        <Button x:Name="button8" Content="Зарплаты директора и заместителя" Grid.Column="2" HorizontalAlignment="Left" Margin="0,145,0,0" VerticalAlignment="Top" Width="228" Click="btnSalaryDirectorAndAssistant"/>
+        <Button x:Name="button9" Content="Сортировка сотрудников по имени" Grid.Column="2" HorizontalAlignment="Left" Margin="1,364,0,0" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.088,-0.47" Height="20" Click="btnSortEmployeesByName"/>
+        <Button x:Name="button10" Content="Сортировка сотрудников по зарплате" Grid.Column="2" HorizontalAlignment="Left" Margin="1,389,0,0" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.088,-0.47" Height="20" Click="btnSortEmployeesBySalary"/>
+        <TextBox x:Name="textBox2_Copy" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="1,243,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Age, ElementName=listView}" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.487,-0.636"/>
+        <TextBox x:Name="textBox2_Copy1" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="1,266,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Salary, ElementName=listView}" VerticalAlignment="Top" Width="228" RenderTransformOrigin="0.487,-0.636"/>
+        <Button x:Name="button2_Copy" Click="btnRefEmployee" Content="Редактировать сотрудника" Grid.Column="2" HorizontalAlignment="Left" Margin="1,289,0,0" VerticalAlignment="Top" Width="228" Height="20" RenderTransformOrigin="0.495,1.309"/>
+    </Grid>
+</Window>
